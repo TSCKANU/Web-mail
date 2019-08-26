@@ -1,0 +1,54 @@
+create database test
+
+create table user(
+id VARCHAR(20) NOT NULL,
+name VARCHAR(20),
+birth_date DATE,
+password VARCHAR(20),
+phone VARCHAR(11),
+email VARCHAR(30),
+primary key(id));
+
+create table board(
+board_code INT(11) NOT NULL,
+id VARCHAR(20),
+title VARCHAR(30),
+content TEXT(500),
+view INT(11),
+posting_time DATETIME,
+primary key(board_code), 
+foreign key(id) references user(id));
+
+create table comment(
+comment_code INT(11) NOT NULL,
+board_code INT(11),
+id VARCHAR(20),
+content TEXT(500),
+posting_time DATETIME,
+primary key(comment_code),
+foreign key(board_code) references board(board_code),
+foreign key(id) references user(id));
+
+create table mail(
+mail_code INT(11) NOT NULL,
+send_id VARCHAR(20),
+rec_id VARCHAR(20),
+title VARCHAR(30),
+uploadfile VARCHAR(30),
+content TEXT(500),
+send_time DATETIME,
+primary key(mail_code),
+foreign key(send_id) references user(id),
+foreign key(rec_id) references user(id));
+
+create table rec_mail(
+recmail_code INT(11) NOT NULL,
+mail_code INT(11),
+primary key(recmail_code),
+foreign key(mail_code) references mail(mail_code));
+
+create table send_mail(
+sendmail_code INT(11) NOT NULL,
+mail_code INT(11),
+primary key(sendmail_code),
+foreign key(mail_code) references mail(mail_code));

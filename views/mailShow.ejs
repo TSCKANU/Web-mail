@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<style type="text/css">
+    .arrange{
+      margin-left: 2px;
+/*      width:70px;*/
+      height:30px;
+    }
+
+    .h-arrange2{
+      margin-left:  3px;
+      width:55px;
+      height:24px;
+      text-align:center;
+      border: 1.2px solid steelblue;
+      background: white; //배경 설정(보내기)
+    }
+
+</style>
+<script src="/javascripts/ckeditor/ckeditor.js"></script>
+<script>
+    window.onload = function() {
+        var mailData = '<%=mailData%>';
+
+        if (!mailData) {
+            alert('메일을 가져오는 도중 오류가 발생.');
+            history.go(-1);
+        }
+
+        CKEDITOR.replace('content');
+    }
+</script>
+</head>
+<body>
+    <h4 style="margin-left:5px ; font-size: 1.1em; font-weight: bold;">메일 확인</h4>
+        <div class="h-arrange2" style="float:left; margin-left: 5px">
+            <a href="/mail/mail_write?rec_id=<%=mailData[0].send_id%>">답장</a>&nbsp;&nbsp;
+        </div>
+        <div class="h-arrange2" style="float:left">
+            <a href="/mail/mail_delete/<%=mailData[0].mail_code%>?type=<%=mailType%>">
+                삭제
+            </a></div>
+            <br><div style="margin-top:13px">
+        <hr color = "steelblue" width=80% align=left /></div>
+        <div>
+            <div>
+                <div class="arrange">
+                    <h2><%=mailData[0].title%></h2>
+                </div>
+            </div>
+            <div>
+                <div class="arrange">
+                    보낸사람&nbsp;&nbsp;&nbsp;<%=mailData[0].send_id%>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div class="arrange">
+                    받는사람&nbsp;&nbsp;&nbsp;<%=mailData[0].rec_id%>
+                </div>
+            </div>
+            <br>
+                <%
+                    if (mailData[0].uploadfile != '') {
+                %>
+                        <div>
+                            <div class="arrange" style="float:left;">
+                                <label>첨부파일: </label>
+                            </div>
+                            <span><a href="/mail/mailShow/download/<%=mailData[0].mail_code%>"><%=mailData[0].uploadfile_origin%></a></span>
+                        </div>
+                <%
+                    }
+                %>
+        </div>
+        <br>
+        <hr color = "steelblue" align=left width=80% />
+        <div>
+            <div>
+                <textarea id="content" name="content" rows="10" cols="80" style="border-color:steelblue; border-width:1.2px">
+                    <%=mailData[0].content%>
+                </textarea>
+            </div>
+        </div>
+</body>

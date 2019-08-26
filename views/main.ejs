@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%=title%></title>
+<style type="text/css">
+            @media screen and (max-width: 480px) {
+                h1 { font-size: 20pt; }
+                .one{text-align: center;
+                  position: absolute;
+                  left:37%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+                .two{text-align: center;
+                  position: absolute;
+                  left:53%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+                .three{text-align: center;
+                  position: absolute;
+                  left:45%; top:30%;
+                  width:100px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+            }
+            @media screen and (min-width: 480px) and (max-width: 800px) {
+                h1 { font-size: 27pt; }
+                .one{text-align: center;
+                  position: absolute;
+                  left:37%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;
+                }
+                .two{text-align: center;
+                  position: absolute;
+                  left:53%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+                .three{text-align: center;
+                  position: absolute;
+                  left:45%; top:30%;
+                  width:100px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+
+            }
+            @media screen and (min-width: 800px) {
+                h1 { font-size: 40pt; }
+                .one{
+                  position: absolute;
+                  left:37%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+                .two{
+                  position: absolute;
+                  left:53%; top:20%;
+                  width:80px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+                .three{text-align: center;
+                  position: absolute;
+                  left:45%; top:30%;
+                  width:100px; height:35px;
+                  text-align: center; float: left;font-size:1.5em;
+                  border: 1.2px solid steelblue;}
+            }
+    h1{text-align: center;color: black}
+    .one{text-align: center}
+    .two{text-align: center}
+</style>
+</head>
+<body>
+    <h1><%=id%>님 환영합니다!</h1>
+    <div class="one">
+        <a href="">채팅</a>
+    </div>
+    <div class="two">
+        <a href="/mail/reclist/1">메일</a>
+    </div>
+    <br>
+    <br>
+    <div class="three">
+        <a href="/logout">로그아웃</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+            @media screen and (max-width: 480px) {
+                .id{width: 94%;}
+                .pw{width: 94%;}
+                .last{width 90%; text-align: center;
+                  width:100px;
+                  height:25px;
+                  border: 1.2px solid steelblue;}
+                .last2{
+                  width 90%; text-align: center;
+                    width:100px;
+                    height:25px;
+                    border: 1.2px solid steelblue;
+                }
+            }
+            @media screen and (min-width: 480px) and (max-width: 800px) {
+                h1 { font-size: 40pt; }
+                .id{margin:0 auto;width: 35%;}
+                .pw{margin:0 auto;width: 35%;}
+                .last{margin:0 auto;width 80%; text-align: center;
+                  width:80px;
+                  height:25px;
+                  border: 1.2px solid steelblue; float:left;margin-left:280px}
+                .last2{margin:0 auto;width 80%; text-align: center;
+                  width:80px;
+                  height:25px;
+                  border: 1.2px solid steelblue;float:left;margin-left:10px; }
+
+            }
+            @media screen and (min-width: 800px) {
+                h1 { font-size: 50pt; }
+                .id{margin:0 auto; width: 280px;}
+                .pw{margin:0 auto; width: 280px;}
+                .last_container{
+
+                }
+                .last{margin:0 auto;width: 80px;
+                  height:25px;
+                  border: 1.2px solid steelblue; float:left;
+                  position: absolute;
+                  left:43%; top:38%;
+
+                }
+                .last2{
+                  margin:0 auto;width: 80px;
+                    height:25px;
+                    border: 1.2px solid steelblue;float:left;
+                    position: absolute;
+                    margin-left:10px;
+                    left:53%; top:38%;
+                }
+            }
+    h1{text-align: center;color: black}
+    .id{text-align: right;}
+    .pw{text-align: right;}
+    .last{text-align: center}
+    .last2{ text-align: center}
+</style>
+</head>
+
+<body>
+    <form name="login" action="/login" method="post">
+        <h1>WELCOME!</h1>
+        <br><br>
+        <div class="id">
+            아이디 :
+            <input type="text" name="id"  style="border-color:steelblue; border-width:1.2px; margin-left:5px"/>
+        </div>
+
+        <div class="pw">
+            비밀번호 :
+            <input type="password" name="password" style="border-color:steelblue; border-width:1.2px; margin-left:5px"/>
+        </div>
+        <br>
+        <div class="last" >
+            <a href="/signup">회원가입</a>
+        </div>
+        <div class="last2">
+            <a href="javascript:login.submit()">로그인</a>
+        </div>
+    </form>
+</body>
+</html>

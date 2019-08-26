@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<style type="text/css">
+
+    .arrange{
+      margin-left: 2px;
+      width:70px;
+      height:25px;
+    }
+
+    .h-arrange2{
+      margin-left:  3px;
+      text-align:center;
+      width:70px;
+      height:25px;
+      border: 1.2px solid steelblue;
+      background: white; //배경 설정(보내기)
+    }
+
+</style>
+<script src="/javascripts/ckeditor/ckeditor.js"></script>
+<script>
+    window.onload = function() {
+        var result = <%=result%>;
+        
+        if (!result) {
+            alert('<%=Message%>');
+            history.go(-1);
+            
+            return;
+        }
+        
+        CKEDITOR.replace('content');
+    }
+    
+    function userChoice() {
+        document.frm.rec_id.value = document.frm.userlist.value;
+    }
+    
+    function mailCheck() {
+        if (document.frm.rec_id.value == '') {
+            alert('받는 사람을 선택하십시오.');
+            frm.userlist.focus();
+            return;
+        }
+        
+        if (document.frm.title.value == '') {
+            alert('제목을 입력하여 주십시오.');
+            frm.title.focus();
+            return;
+        }
+        
+        frm.submit();
+    }
+</script>
+</head>
+<body>
+    <form name="frm" action="/mail/mail_write" method="post" enctype="multipart/form-data">
+        <h4>메일 쓰기</h4>
+        <div class="h-arrange2">
+            <a href="javascript:mailCheck()">보내기</a>
+        </div>
+        <hr color = "steelblue" align=left width=80% />
+        <br>
+        <br>
+        <div>
+            <div>
+                <div class="arrange" style="float:left;">
+                    받는사람
+                </div>
+                <input type="text" name="rec_id" size="50" style="border-color:steelblue; border-width:1.2px; margin-right:3px" placeholder="받는사람"
+                       <% if (rec_id != '') {%> value="<%=rec_id%>" <%}%> readonly >
+                <select id="userlist" name="userlist" onchange="userChoice()" style="border-color:steelblue; border-width:1.2px">
+                    <option value="" <% if (rec_id == '') { %> selected <% } %>>
+                        사용자목록
+                    </option>
+                    <%
+                        for (var i = 0; i < userlist.length; i++) {
+                            var id = userlist[i].id;
+                            if (rec_id != '' && rec_id == id) {
+                    %>
+                                <option value="<%=id%>" selected><%=id%></option>
+                    <%
+                            } else {
+                    %>
+                                <option value="<%=id%>"><%=id%></option>
+                    <%
+                            }
+                        }
+                    %>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <div class="arrange" style="float:left;">
+                    제목
+                </div>
+                <input type="text" name="title" placeholder="제목 입력" size="50" style="border-color:steelblue; border-width:1.2px">
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <div class="arrange" style="float:left;">
+                    파일첨부
+                </div>
+                <input type="file" name="uploadfile" placeholder="파일첨부">
+            </div>
+        </div>
+        <br>
+        <div>
+            <div class="arrange">
+                내용
+            </div>
+            <textarea id="content" name="content" rows="10" cols="80" style="border-color:steelblue; border-width:1.2px"></textarea>
+        </div>
+    </form>
+</body>
+</html>

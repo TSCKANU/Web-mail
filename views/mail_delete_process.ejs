@@ -1,0 +1,14 @@
+<script>
+    window.onload = function() {
+        alert('<%=Message%>');
+        
+        var result = '<%=result%>';
+        var mailType = '<%=mailType%>';
+        
+        if (mailType == 'rec') {
+            window.location.href = "/mail/reclist/1";
+        } else {
+            window.location.href = "/mail/sendlist/1";
+        }
+    }
+</script>

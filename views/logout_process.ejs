@@ -1,0 +1,13 @@
+<script>
+        window.onload = function() {
+            alert('<%=Message%>');
+                  
+            var result = '<%=result%>';
+            
+            if (result == 'fail') {
+                history.go(-1);
+            } else {
+                window.location.href = '/login';
+            }
+        }
+</script>

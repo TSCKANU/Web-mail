@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%=title%></title>
+<style type="text/css">
+    body {
+      font:14px/1.8 Arial, Helvetica, sans-serif;
+
+    }
+    .frame {
+        width: 1200px;
+        height: 600px;
+        margin: 0 auto;
+        border: 1px solid #aaa;
+        border: 1.2px solid steelblue;
+        background: white;
+    }
+    .header {
+        padding:10px 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        border-right: 1.2px solid steelblue;
+        border-bottom: 1.2px solid steelblue;
+        background: white;
+        height:30px;
+    }
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        width: 300px;
+        height: 30px;
+        text-align: left;
+    }
+    .logo2{
+      font-size: 1em;
+      font-weight: bold;
+      height:30px;
+      text-align: right;
+      margin-top:5px;
+    }
+    .container {
+        overflow: hidden;
+    }
+    .nav {
+        float: left;
+        width: 182px;
+        height: 450px;
+        margin-right: 50px;
+        border-right: 1.2px solid steelblue;
+        background: white;
+    }
+    .nav-list {
+        list-style: none;
+        margin: 0;
+        padding: 10px 0;
+        padding-left: 30px;
+    }
+    .nav-item {
+        margin-top:10px;
+        margin: 4px 0;
+        margin-left: 10px;
+        width:100px;
+    }
+    .nav-link {
+        display: block;
+        text-decoration: none;
+        padding: 4px 10px;
+    }
+
+    .nav-link:hover {
+        background: #5457de;
+    }
+    .content {
+        float: left;
+        width: 900px;
+        height: 450px;
+    }
+    .footer {
+        text-align: center;
+        border-top: 1px solid #aaa;
+        margin: 20px 20px 0;
+        font-size: 12px;
+    }
+    .h-arrange{ // 메일함 수평 정렬
+      width: 850px;
+      height: 30px;
+      border: 1px solid steelblue;
+      background-color: white;
+    }
+      nav ul{margin-top: 2.5px; padding-top:1px;}
+      nav ul li{
+        display:inline;
+        border-left:1px solid steelblue;
+        padding:0 45px;
+      }
+      nav ul li:first-child{border-left:none;}
+
+    .h-arrnge2{
+      margin-left: 3px;
+      text-align:center;
+      width:78px;
+      height:25px;
+      border: 1.2px solid steelblue;
+      background: white;
+    }
+</style>
+</head>
+<body>
+    <%
+        var curPage = curPage;              // 현재 페이지
+        var numPerPage = numPerPage;        // 한 페이지에 보여지는 회원 수
+        var totalRecord = totalRecord;      // 전체 게시글 수
+        var pageData = pageData;            // pageInfo 데이터.
+    %>
+    <!-- //frame -->
+    <div class="frame">
+        <!-- //header -->
+        <div class="header">
+            <div class="logo" style="float:left; margin-right:618px">
+                메일
+            </div>
+            <div class="logo2" style="float:left;">
+                <a href="/logout">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#">채팅</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <%=id%>님
+            </div>
+        </div>
+        <!-- //container -->
+        <div class="container">
+            <!-- //nav -->
+            <div class="nav">
+                <div class="h-arrnge2" style="margin-top:20px; margin-left: 4px;padding-left: 8px;float:left; margin-right:1px; background-color: white;">
+                    <a href="/mail/userlist">사용자목록</a>&nbsp;&nbsp;
+                </div>
+                <div class="h-arrnge2" style="float:left; margin-top:20px;background-color: white">
+                    <a href="/mail/mail_write">메일쓰기</a>
+                </div>
+                <ul class="nav-list" style="margin-top:50px">
+<!--                    <li class="nav-item"><a href="" class="nav-link">전체메일</a></li>-->
+                    <li class="nav-item">
+                        <a href="/mail/reclist/1" class="nav-link">받은 메일함</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/mail/sendlist/1" class="nav-link">보낸 메일함</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content" style="overflow:scroll">
+<!--                <iframe src="mail/mail_list" width="600" height="300" marginwidth="0" marginheight="0" scrolling="yes"></iframe>-->
+                <div id="list_for_view" class="listWrap">
+				        <h4>받은 메일함</h4>
+                        <lable>총 메일 수: <%=totalRecord%></lable>
+				</div>
+                <div class="h-arrange">
+                    <nav>
+                        <ul>
+                          <li>번호</li>
+                          <li>보낸사람</li>
+                          <li>제목</li>
+                          <li>시간</li>
+                          <li>파일첨부</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="h-arrange">
+                    <nav>
+                    <%
+                        if (lists) {
+                            for (var i = pageData.strRecord; i < pageData.strRecord + numPerPage; i++) {
+                                var mail_code = lists[i].mail_code;
+                                var send_id = lists[i].send_id;
+                                var title = lists[i].title;
+                                var send_time = lists[i].send_time;
+                                var uploadfile = lists[i].uploadfile;
+                    %>
+                                <ul class="ui grid">
+                                    <li class="no"><%=totalRecord - i%></li>
+                                    <li class="send_id"><%=send_id%></li>
+                                    <li class="title" onclick="javascript: window.location='/mail/mailshow/<%=mail_code%>?type=rec'">
+                                        <b><%=title%></b>
+                                    </li>
+                                    <li class="send_time"><%=send_time%></li>
+                    <%
+                                if (uploadfile == '') {
+                    %>
+                                    <li class="uploadfile">X</li>
+                    <%
+                                } else {
+                    %>
+                                    <li class="uploadfile">O</li>
+                    <%          
+                                }        
+                    %>
+                                </ul>
+                    <%
+                            }
+                        } else {
+                    %>
+                            
+                            <ul>
+                                <li class="noMail">
+                                    <h4>받은메일이 없습니다.</h4>
+                                </li>
+                            </ul>
+                    <%
+                        }
+                    %>
+                    </nav>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div align="center" id="PagingNav">
+                    <%
+                        if (pageData.preLink > 1) {
+                    %>
+                            <a class="pre_n" href="/mail/reclist/<%=preLink%>" title="이전" id="pre_page">
+                                <span class="spr">
+                                    [이전]
+                                    <em class="blind">목록에서 이전 페이지 이동</em>
+                                </span>
+                            </a>
+                    <%
+                        }
+                        for (var i = pageData.firstPage; i <= pageData.lastPage; i++) {
+                            if (i == curPage) {
+                    %>
+                                <%=i%>
+                    <%
+                            } else { 
+                    %>
+                                [<a class="pre_n" href="/mail/reclist/<%=i%>" title="현재페이지" id="cur_page"><%=i%></a>]
+                    <%
+                            }
+                        }
+                        if (pageData.nextLink != 0) {
+                    %>
+                            <a class="next" href="/mail/reclist/<%=nextLink%>" title="다음"  id="next_page">
+                                <span class="spr">
+                                    [다음]
+                                    <em class="blind">목록에서 다음 페이지 이동</em>
+                                </span>
+                            </a>
+                    <%
+                        }
+                    %>
+				</div>
+            </div>
+        </div>
+        <!-- //footer -->
+        <div class="footer">
+            <p class="copyright">&copy;copy</p>
+        </div>
+    </div>
+</body>
+</html>

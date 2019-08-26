@@ -1,0 +1,16 @@
+<script>
+        window.onload = function() {
+            var result = <%=result%>;
+        
+            if (!result) {
+                alert('<%=Message%>');
+                history.go(-1);
+
+                return;
+            } else {
+                alert('<%=Message%>');
+                location.href = '/mail/reclist/1';
+            }
+        
+        }
+</script>
